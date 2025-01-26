@@ -1,0 +1,2 @@
+# gAIroscope
+Market Predictor app
