@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gAIroscope</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ecf0f1;
+        }
+
+        /* Navigation and Layout */
+        #stackMenu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;o
+            cursor: pointer;
+        }
+
+        #stackMenuItems {
+            display: none;
+            background-color: #fff;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+            padding: 10px;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 150px;
+        }
+
+        #stackMenuItems a {
+            display: block;
+            text-decoration: none;
+            color: black;
+            padding: 8px;
+            margin: 5px 0;
+        }
+
+        #stackMenuItems a:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Notification Icon */
+        #notificationIcon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #3498db;
+        }
+
+        #notificationIcon:hover {
+            color: #2980b9;
+        }
+
+        /* Bottom Bar */
+        #bottomBar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #bottomBar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* Index Cards */
+        #indexList {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .indexCard {
+            background-color: #3498db;
+            color: white;
+            width: 150px;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .indexCard:hover {
+            background-color: #2980b9;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            padding: 20px;
+        }
+
+        /* Profile and Account Form */
+        .profile-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .profile-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .profile-form button:hover {
+            background-color: #2980b9;
+        }
+
+        /* AI Page */
+        #aiPage {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #aiPage h2 {
+            color: #3498db;
+        }
+
+        /* Data Explorer Page */
+        #dataExplorerPage {
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #dataExplorerPage h2 {
+            color: #3498db;
+        }
+
+        /* Fullscreen Effect */
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fullscreen-content {
+            background-color: #fff;
+            width: 80%;
+            height: 80%;
+            padding: 30px;
+            overflow-y: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo -->
+    <div style="text-align: center; padding-top: 30px;">
+        <img src="logo.JPG" alt="gAIroscope Logo" width="100">
+    </div>
+
+    <!-- Stack Menu -->
+    <div id="stackMenu">
+        &#9776; Menu
+    </div>
+    <div id="stackMenuItems">
+        <a href="#" onclick="openFullScreen('settings')">Settings</a>
+        <a href="#" onclick="openFullScreen('profileAndAccount')">Profile & Account</a>
+        <a href="#" onclick="openFullScreen('ai')">AI</a>
+        <a href="#" onclick="openFullScreen('dataExplorer')">Data Explorer</a>
+    </div>
+
+    <!-- Notification Icon (Top Right Corner) -->
+    <div id="notificationIcon" onclick="openFullScreen('notifications')">
+        &#128276; <!-- Notification Icon (Bell) -->
+    </div>
+
+    <!-- Home Page Content -->
+    <div id="homePage">
+        <div id="indexList">
+            <!-- Updated Index Cards -->
+            <div class="indexCard" onclick="openChart('Nasdaq')">Nasdaq</div>
+            <div class="indexCard" onclick="openChart('US30')">US30</div>
+            <div class="indexCard" onclick="openChart('Gold_vs_USD')">Gold vs USD</div>
+            <div class="indexCard" onclick="openChart('VIX75')">VIX75</div>
+        </div>
+    </div>
+
+    <!-- Full-Screen Pages (appear in modal-like windows) -->
+    <div class="fullscreen" id="settingsPage" style="display: none;">
+        <div class="fullscreen-content">
+            <h2>Settings Page</h2>
+            <p>Settings content here...</p>
+            <button onclick="closeFullScreen('settings')">Close</button>
+        </div>
+    </div>
+
+    <div class="fullscreen" id="profileAndAccountPage" style="display: none;">
+        <div class="fullscreen-content">
+            <h2>Profile & Account</h2>
+            <p>Update your details here:</p>
+            <form class="profile-form">
+                <input type="text" id="fullName" placeholder="Full Name">
+                <input type="text" id="cellNumber" placeholder="Cell Number">
+                <input type="email" id="email" placeholder="Account Email">
+                <button type="button" onclick="saveProfile()">Save Profile</button>
+            </form>
+            <button onclick="closeFullScreen('profileAndAccount')">Close</button>
+        </div>
+    </div>
+
+    <div class="fullscreen" id="aiPage" style="display: none;">
+        <div class="fullscreen-content">
+            <h2>AI Communication Hub</h2>
+            <p>This is where the app communicates with you, alerts you about updates, asks for feedback, and more.</p>
+            <button onclick="showAlert()">Send Alert</button>
+            <button onclick="closeFullScreen('ai')">Close</button>
+        </div>
+    </div>
+
+    <div class="fullscreen" id="dataExplorerPage" style="display: none;">
+        <div class="fullscreen-content">
+            <h2>Data Explorer</h2>
+            <p>This is where the app searches for data sources, platforms, and more.</p>
+            <button onclick="searchData()">Start Search</button>
+            <button onclick="closeFullScreen('dataExplorer')">Close</button>
+        </div>
+    </div>
+
+    <div class="fullscreen" id="notificationsPage" style="display: none;">
+        <div class="fullscreen-content">
+            <h2>Notifications</h2>
+            <p>Your notifications will appear here.</p>
+            <button onclick="closeFullScreen('notifications')">Close</button>
+        </div>
+    </div>
+
+    <!-- Bottom Bar with Navigation -->
+    <div id="bottomBar">
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="openFullScreen('ai')">AI</a>
+        <a href="#" onclick="openFullScreen('profileAndAccount')">Profile & Account</a>
+        <a href="#" onclick="openFullScreen('dataExplorer')">Data Explorer</a>
+    </div>
+
+    <script>
+        // Toggle stack menu visibility
+        document.getElementById('stackMenu').addEventListener('click', function() {
+            const menuItems = document.getElementById('stackMenuItems');
+            menuItems.style.display = (menuItems.style.display === 'block') ? 'none' : 'block';
+        });
+
+        // Open full-screen page
+        function openFullScreen(page) {
+            document.getElementById(page + 'Page').style.display = 'flex';
+            document.getElementById('homePage').style.display = 'none';
+        }
+
+        // Close full-screen page
+        function closeFullScreen(page) {
+            document.getElementById(page + 'Page').style.display = 'none';
+            document.getElementById('homePage').style.display = 'block';
+        }
+
+        // Show the home page when the app is loaded
+        window.onload = function() {
+            document.getElementById('homePage').style.display = 'block';
+        }
+
+        // Save profile information
+        function saveProfile() {
+            const name = document.getElementById('fullName').value;
+            const cell = document.getElementById('cellNumber').value;
+            const email = document.getElementById('email').value;
+
+            if (name && cell && email) {
+                alert('Profile saved!');
+            }
+        }
+
+        // Show alert (AI Communication Hub)
+        function showAlert() {
+            alert('AI Alert triggered!');
+        }
+
+        // Search Data (Data Explorer)
+        function searchData() {
+            alert('Searching for data...');
+        }
+    </script>
+</body>
+</html>
