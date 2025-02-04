@@ -17,7 +17,7 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            z-index: 100;o
+            z-index: 100;
             cursor: pointer;
         }
 
@@ -210,6 +210,13 @@
             <div class="indexCard" onclick="openChart('Gold_vs_USD')">Gold vs USD</div>
             <div class="indexCard" onclick="openChart('VIX75')">VIX75</div>
         </div>
+
+        <!-- Market Data Section -->
+        <h2>Market Data</h2>
+        <p>VIX Index: <span id="vixValue">Loading...</span></p>
+        <p>NASDAQ: <span id="nasdaqValue">Loading...</span></p>
+        <p>US30: <span id="us30Value">Loading...</span></p>
+        <p>Gold/USD: <span id="goldValue">Loading...</span></p>
     </div>
 
     <!-- Full-Screen Pages (appear in modal-like windows) -->
@@ -310,9 +317,4 @@
         }
 
         // Search Data (Data Explorer)
-        function searchData() {
-            alert('Searching for data...');
-        }
-    </script>
-</body>
-</html>
+        function searchData()
