@@ -4,317 +4,209 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gAIroscope</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ecf0f1;
-        }
-
-        /* Navigation and Layout */
-        #stackMenu {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-            cursor: pointer;
-        }
-
-        #stackMenuItems {
-            display: none;
-            background-color: #fff;
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-            padding: 10px;
-            position: absolute;
-            top: 40px;
-            left: 0;
-            width: 150px;
-        }
-
-        #stackMenuItems a {
-            display: block;
-            text-decoration: none;
-            color: black;
-            padding: 8px;
-            margin: 5px 0;
-        }
-
-        #stackMenuItems a:hover {
-            background-color: #f0f0f0;
-        }
-
-        /* Notification Icon */
-        #notificationIcon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #3498db;
-        }
-
-        #notificationIcon:hover {
-            color: #2980b9;
-        }
-
-        /* Bottom Bar */
-        #bottomBar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        #bottomBar a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        /* Index Cards */
-        #indexList {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            padding: 20px;
-        }
-
-        .indexCard {
-            background-color: #3498db;
-            color: white;
-            width: 150px;
-            padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .indexCard:hover {
-            background-color: #2980b9;
-        }
-
-        /* Pages */
-        .page {
-            display: none;
-            padding: 20px;
-        }
-
-        /* Profile and Account Form */
-        .profile-form input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .profile-form button {
-            width: 100%;
-            padding: 10px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .profile-form button:hover {
-            background-color: #2980b9;
-        }
-
-        /* AI Page */
-        #aiPage {
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        #aiPage h2 {
-            color: #3498db;
-        }
-
-        /* Data Explorer Page */
-        #dataExplorerPage {
-            padding: 20px;
-            background-color: #ecf0f1;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        #dataExplorerPage h2 {
-            color: #3498db;
-        }
-
-        /* Fullscreen Effect */
-        .fullscreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .fullscreen-content {
-            background-color: #fff;
-            width: 80%;
-            height: 80%;
-            padding: 30px;
-            overflow-y: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <!-- Logo -->
-    <div style="text-align: center; padding-top: 30px;">
-        <img src="logo.JPG" alt="gAIroscope Logo" width="100">
+    <!-- Logo as Stack Menu Button (Top Left Corner) -->
+    <div class="logo-container" onclick="toggleStackMenu()">
+        <img src="logo.JPG" alt="Logo" class="logo">
     </div>
 
-    <!-- Stack Menu -->
-    <div id="stackMenu">
-        &#9776; Menu
-    </div>
+    <!-- Stack Menu Items -->
     <div id="stackMenuItems">
-        <a href="#" onclick="openFullScreen('settings')">Settings</a>
-        <a href="#" onclick="openFullScreen('profileAndAccount')">Profile & Account</a>
-        <a href="#" onclick="openFullScreen('ai')">AI</a>
-        <a href="#" onclick="openFullScreen('dataExplorer')">Data Explorer</a>
+        <a href="#" onclick="openPage('settings')">Settings</a>
+        <a href="#" onclick="openPage('marketNews')">Market News</a>
+        <a href="#" onclick="openPage('addIndex')">Add Indexes</a>
     </div>
 
     <!-- Notification Icon (Top Right Corner) -->
-    <div id="notificationIcon" onclick="openFullScreen('notifications')">
-        &#128276; <!-- Notification Icon (Bell) -->
+    <div id="notificationIcon" onclick="openPage('notifications')">
+        &#128276; <!-- Bell Icon -->
     </div>
+
+    <!-- App Name (Top Middle) -->
+    <div class="app-name">gAIroscope</div>
 
     <!-- Home Page Content -->
-    <div id="homePage">
+    <div id="homePage" class="page">
         <div id="indexList">
-            <!-- Updated Index Cards -->
-            <div class="indexCard" onclick="openChart('Nasdaq')">Nasdaq</div>
-            <div class="indexCard" onclick="openChart('US30')">US30</div>
-            <div class="indexCard" onclick="openChart('Gold_vs_USD')">Gold vs USD</div>
-            <div class="indexCard" onclick="openChart('VIX75')">VIX75</div>
-        </div>
-
-        <!-- Market Data Section -->
-        <h2>Market Data</h2>
-        <p>VIX Index: <span id="vixValue">Loading...</span></p>
-        <p>NASDAQ: <span id="nasdaqValue">Loading...</span></p>
-        <p>US30: <span id="us30Value">Loading...</span></p>
-        <p>Gold/USD: <span id="goldValue">Loading...</span></p>
-    </div>
-
-    <!-- Full-Screen Pages (appear in modal-like windows) -->
-    <div class="fullscreen" id="settingsPage" style="display: none;">
-        <div class="fullscreen-content">
-            <h2>Settings Page</h2>
-            <p>Settings content here...</p>
-            <button onclick="closeFullScreen('settings')">Close</button>
-        </div>
-    </div>
-
-    <div class="fullscreen" id="profileAndAccountPage" style="display: none;">
-        <div class="fullscreen-content">
-            <h2>Profile & Account</h2>
-            <p>Update your details here:</p>
-            <form class="profile-form">
-                <input type="text" id="fullName" placeholder="Full Name">
-                <input type="text" id="cellNumber" placeholder="Cell Number">
-                <input type="email" id="email" placeholder="Account Email">
-                <button type="button" onclick="saveProfile()">Save Profile</button>
-            </form>
-            <button onclick="closeFullScreen('profileAndAccount')">Close</button>
+            <!-- Index Cards -->
+            <div class="indexCard" onclick="openPage('chart', 'Nasdaq')">
+                <div class="indexName">Nasdaq</div>
+                <div class="indexPrice" id="nasdaqPrice">$15,000.00</div>
+                <button class="remove-button" onclick="removeIndex(this)">Remove</button>
+            </div>
+            <div class="indexCard" onclick="openPage('chart', 'US30')">
+                <div class="indexName">US30</div>
+                <div class="indexPrice" id="us30Price">$35,000.00</div>
+                <button class="remove-button" onclick="removeIndex(this)">Remove</button>
+            </div>
+            <div class="indexCard" onclick="openPage('chart', 'Gold_vs_USD')">
+                <div class="indexName">Gold vs USD</div>
+                <div class="indexPrice" id="goldPrice">$1,950.00</div>
+                <button class="remove-button" onclick="removeIndex(this)">Remove</button>
+            </div>
+            <div class="indexCard" onclick="openPage('chart', 'VIX75')">
+                <div class="indexName">VIX75</div>
+                <div class="indexPrice" id="vixPrice">$18.50</div>
+                <button class="remove-button" onclick="removeIndex(this)">Remove</button>
+            </div>
         </div>
     </div>
 
-    <div class="fullscreen" id="aiPage" style="display: none;">
-        <div class="fullscreen-content">
-            <h2>AI Communication Hub</h2>
-            <p>This is where the app communicates with you, alerts you about updates, asks for feedback, and more.</p>
-            <button onclick="showAlert()">Send Alert</button>
-            <button onclick="closeFullScreen('ai')">Close</button>
+    <!-- Settings Page -->
+    <div id="settingsPage" class="page">
+        <h2 class="page-title">Settings</h2>
+        <p class="page-description">Customize your app experience here.</p>
+        <div class="settings-list">
+            <label>
+                <input type="checkbox" id="darkModeToggle"> Dark Mode
+            </label>
+            <label>
+                <input type="checkbox" id="notificationsToggle"> Enable Notifications
+            </label>
+            <label>
+                <input type="text" id="timezoneInput" placeholder="Set Timezone">
+            </label>
+            <label>
+                <input type="checkbox" id="gridLinesToggle"> Show Grid Lines
+            </label>
+            <label>
+                <input type="checkbox" id="trendLinesToggle"> Enable Trend Lines
+            </label>
+            <label>
+                <input type="number" id="accuracyThreshold" placeholder="Set Accuracy Threshold (%)">
+            </label>
+            <button onclick="saveSettings()">Save Settings</button>
         </div>
+        <button class="close-button" onclick="closePage('settings')">Close</button>
     </div>
 
-    <div class="fullscreen" id="dataExplorerPage" style="display: none;">
-        <div class="fullscreen-content">
-            <h2>Data Explorer</h2>
-            <p>This is where the app searches for data sources, platforms, and more.</p>
-            <button onclick="searchData()">Start Search</button>
-            <button onclick="closeFullScreen('dataExplorer')">Close</button>
+    <!-- Market News Page -->
+    <div id="marketNewsPage" class="page">
+        <h2 class="page-title">Market News</h2>
+        <p class="page-description">Stay updated with the latest market news and trends.</p>
+        <div id="newsList">
+            <!-- News headlines will be dynamically added here -->
         </div>
+        <button class="close-button" onclick="closePage('marketNews')">Close</button>
     </div>
 
-    <div class="fullscreen" id="notificationsPage" style="display: none;">
-        <div class="fullscreen-content">
-            <h2>Notifications</h2>
-            <p>Your notifications will appear here.</p>
-            <button onclick="closeFullScreen('notifications')">Close</button>
+    <!-- Add Index Page -->
+    <div id="addIndexPage" class="page">
+        <h2 class="page-title">Add Indexes</h2>
+        <p class="page-description">Add new indexes to analyze and predict.</p>
+        <div class="suggested-indexes">
+            <h3>Suggested Indexes</h3>
+            <div class="index-list">
+                <div class="index-item" onclick="addIndex('S&P 500')">S&P 500</div>
+                <div class="index-item" onclick="addIndex('FTSE 100')">FTSE 100</div>
+                <div class="index-item" onclick="addIndex('Nikkei 225')">Nikkei 225</div>
+                <div class="index-item" onclick="addIndex('DAX')">DAX</div>
+            </div>
         </div>
+        <div class="search-index">
+            <h3>Search Indexes</h3>
+            <input type="text" id="searchIndexInput" placeholder="Search for an index...">
+            <button onclick="searchIndex()">Search</button>
+            <div id="searchResults"></div>
+        </div>
+        <button class="close-button" onclick="closePage('addIndex')">Close</button>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profilePage" class="page">
+        <h2 class="page-title">Profile</h2>
+        <p class="page-description">Manage your personal information and account details here.</p>
+        <form class="profile-form">
+            <input type="text" id="fullName" placeholder="Full Name">
+            <input type="text" id="streetAddress" placeholder="Street Address">
+            <input type="text" id="city" placeholder="City">
+            <input type="text" id="stateProvince" placeholder="State/Province">
+            <input type="text" id="country" placeholder="Country">
+            <input type="text" id="cellNumber" placeholder="Phone Number">
+            <input type="email" id="email" placeholder="Email Address">
+            <button type="button" onclick="saveProfile()">Save Profile</button>
+        </form>
+        <button class="close-button" onclick="closePage('profile')">Close</button>
+    </div>
+
+    <!-- AI Communication Hub -->
+    <div id="aiPage" class="page">
+        <h2 class="page-title">AI Communication Hub</h2>
+        <p class="page-description">Interact with the AI for trading insights, predictions, and personalized recommendations.</p>
+        <div id="chatbox">
+            <div id="chatMessages"></div>
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        <button class="close-button" onclick="closePage('ai')">Close</button>
+    </div>
+
+    <!-- Notifications Page -->
+    <div id="notificationsPage" class="page">
+        <h2 class="page-title">Notifications</h2>
+        <p class="page-description">View your notifications here. Stay updated on market predictions, AI insights, and app updates.</p>
+        <div id="notificationList">
+            <!-- Notifications will be dynamically added here -->
+        </div>
+        <button class="close-button" onclick="closePage('notifications')">Close</button>
+    </div>
+
+    <!-- Data Explorer Page -->
+    <div id="dataExplorerPage" class="page">
+        <h2 class="page-title">Data Explorer</h2>
+        <p class="page-description">Search and analyze market data. Explore trends, historical data, and predictive insights.</p>
+        <input type="text" id="searchInput" placeholder="Search for data...">
+        <button onclick="searchData()">Search</button>
+        <button class="close-button" onclick="closePage('dataExplorer')">Close</button>
+    </div>
+
+    <!-- Chart Page -->
+    <div id="chartPage" class="page">
+        <!-- Chart Title -->
+        <h2 class="page-title" id="chartTitle">Chart</h2>
+
+        <!-- Back Button (Top Left) -->
+        <button class="back-button" onclick="closePage('chart')">&#8592; Back</button>
+
+        <!-- Timeframe Button (Top Right) -->
+        <div class="timeframe-nob">
+            <button onclick="toggleTimeframeMenu()">Timeframe</button>
+            <div id="timeframeMenu" class="timeframe-menu">
+                <button onclick="changeTimeframe('1s')">1s</button>
+                <button onclick="changeTimeframe('5s')">5s</button>
+                <button onclick="changeTimeframe('1m')">1m</button>
+                <button onclick="changeTimeframe('5m')">5m</button>
+                <button onclick="changeTimeframe('1h')">1h</button>
+                <button onclick="changeTimeframe('4h')">4h</button>
+                <button onclick="changeTimeframe('daily')">Daily</button>
+                <button onclick="changeTimeframe('monthly')">Monthly</button>
+                <button onclick="changeTimeframe('yearly')">Yearly</button>
+            </div>
+        </div>
+
+        <!-- Chart Tools (Below Title) -->
+        <div class="chart-tools">
+            <button id="appearanceButton" onclick="toggleChartAppearanceMenu()">Appearance</button>
+            <button onclick="toggleIndicatorsMenu()">Indicators</button>
+            <button id="linesButton" onclick="toggleLinesMenu()">Lines</button>
+        </div>
+
+        <!-- Chart Canvas -->
+        <canvas id="dummyChart"></canvas>
     </div>
 
     <!-- Bottom Bar with Navigation -->
     <div id="bottomBar">
-        <a href="#" onclick="showPage('home')">Home</a>
-        <a href="#" onclick="openFullScreen('ai')">AI</a>
-        <a href="#" onclick="openFullScreen('profileAndAccount')">Profile & Account</a>
-        <a href="#" onclick="openFullScreen('dataExplorer')">Data Explorer</a>
+        <a href="#" onclick="openPage('home')">Home</a>
+        <a href="#" onclick="openPage('ai')">AI</a>
+        <a href="#" onclick="openPage('profile')">Profile</a>
+        <a href="#" onclick="openPage('dataExplorer')">Explore</a>
     </div>
 
-    <script>
-        // Toggle stack menu visibility
-        document.getElementById('stackMenu').addEventListener('click', function() {
-            const menuItems = document.getElementById('stackMenuItems');
-            menuItems.style.display = (menuItems.style.display === 'block') ? 'none' : 'block';
-        });
-
-        // Open full-screen page
-        function openFullScreen(page) {
-            document.getElementById(page + 'Page').style.display = 'flex';
-            document.getElementById('homePage').style.display = 'none';
-        }
-
-        // Close full-screen page
-        function closeFullScreen(page) {
-            document.getElementById(page + 'Page').style.display = 'none';
-            document.getElementById('homePage').style.display = 'block';
-        }
-
-        // Show the home page when the app is loaded
-        window.onload = function() {
-            document.getElementById('homePage').style.display = 'block';
-        }
-
-        // Save profile information
-        function saveProfile() {
-            const name = document.getElementById('fullName').value;
-            const cell = document.getElementById('cellNumber').value;
-            const email = document.getElementById('email').value;
-
-            if (name && cell && email) {
-                alert('Profile saved!');
-            }
-        }
-
-        // Show alert (AI Communication Hub)
-        function showAlert() {
-            alert('AI Alert triggered!');
-        }
-
-        // Search Data (Data Explorer)
-        function searchData()
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
