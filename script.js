@@ -1,13 +1,70 @@
 let currentPage = null; // Track the currently open page
-let previousChart = null; // Track the previously opened chart
 let chartInstance = null; // Chart.js instance
-let chartData = {
-    Nasdaq: [],
-    US30: [],
-    Gold_vs_USD: [],
-    VIX75: [],
-};
-let updateInterval = 1000; // Default to 1 second
+
+// Fetch real-time data from the backend
+async function fetchMarketData() {
+    try {
+        const response = await fetch('/api/scrape');
+        const data = await response.json();
+
+        if (data.message === 'Data scraped successfully') {
+            // Update the UI with real-time data
+            updatePrices(data.data);
+            if (currentPage === 'chart') {
+                renderChart(data.data);
+            }
+        } else {
+            console.error('Error scraping data:', data.error);
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+// Update prices on the home page
+function updatePrices(data) {
+    const indices = ["nasdaqPrice", "us30Price", "goldPrice", "vixPrice"];
+    const indexNames = ["Nasdaq", "US30", "Gold_vs_USD", "VIX75"];
+
+    indices.forEach((id, i) => {
+        const priceElement = document.getElementById(id);
+        const price = data[indexNames[i].toLowerCase()]; // Get price from scraped data
+        priceElement.textContent = `$${price.toFixed(2)}`;
+    });
+}
+
+// Render the chart with real-time data
+function renderChart(data) {
+    const ctx = document.getElementById('dummyChart').getContext('2d');
+    if (chartInstance) chartInstance.destroy(); // Destroy existing chart
+
+    const indexName = document.getElementById('chartTitle').textContent;
+    const chartData = data[indexName.toLowerCase()]; // Get data for the selected index
+
+    chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Array.from({ length: chartData.length }, (_, i) => i + 1),
+            datasets: [{
+                label: 'Price',
+                data: chartData,
+                borderColor: '#00ffff', // Cyan for bullish
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { grid: { color: '#fff' } },
+                y: { grid: { color: '#fff' } },
+            },
+            plugins: {
+                legend: { display: false },
+            },
+        }
+    });
+}
 
 // Toggle Stack Menu
 function toggleStackMenu() {
@@ -34,7 +91,7 @@ function openPage(page, chartName = null) {
     // If opening a chart, set the title and render the chart
     if (page === 'chart' && chartName) {
         document.getElementById('chartTitle').textContent = chartName;
-        renderDummyChart(chartName);
+        fetchMarketData(); // Fetch real-time data for the chart
     }
 
     // Hide top section on non-home pages
@@ -63,36 +120,6 @@ function closePage(page) {
     document.getElementById('notificationIcon').style.display = 'block';
 }
 
-// Render a dummy chart for the selected index
-function renderDummyChart(indexName) {
-    const ctx = document.getElementById('dummyChart').getContext('2d');
-    if (chartInstance) chartInstance.destroy(); // Destroy existing chart
-
-    chartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: Array.from({ length: 10 }, (_, i) => i + 1), // 10 time points
-            datasets: [{
-                label: 'Price',
-                data: chartData[indexName], // Use index-specific data
-                borderColor: '#00ffff', // Cyan for bullish
-                fill: false,
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: { grid: { color: '#fff' } },
-                y: { grid: { color: '#fff' } },
-            },
-            plugins: {
-                legend: { display: false },
-            },
-        }
-    });
-}
-
 // Toggle timeframe menu
 function toggleTimeframeMenu() {
     const menu = document.getElementById('timeframeMenu');
@@ -101,6 +128,7 @@ function toggleTimeframeMenu() {
 
 // Change timeframe for the chart
 function changeTimeframe(timeframe) {
+    let updateInterval;
     switch (timeframe) {
         case '1s':
             updateInterval = 1000; // 1 second
@@ -132,33 +160,9 @@ function changeTimeframe(timeframe) {
     }
 
     clearInterval(priceUpdateInterval); // Clear the existing interval
-    priceUpdateInterval = setInterval(updatePrices, updateInterval); // Set new interval
+    priceUpdateInterval = setInterval(fetchMarketData, updateInterval); // Set new interval
     alert(`Timeframe changed to ${timeframe}`);
-    renderDummyChart(document.getElementById('chartTitle').textContent);
 }
-
-// Update prices and chart data
-function updatePrices() {
-    const indices = ["nasdaqPrice", "us30Price", "goldPrice", "vixPrice"];
-    const indexNames = ["Nasdaq", "US30", "Gold_vs_USD", "VIX75"];
-
-    indices.forEach((id, i) => {
-        const priceElement = document.getElementById(id);
-        let price = parseFloat(priceElement.textContent.replace(/[^0-9.-]/g, ''));
-        price += (Math.random() - 0.5) * 10; // Random price fluctuation
-        priceElement.textContent = `$${price.toFixed(2)}`;
-
-        // Update chart data for the current index
-        if (currentPage === 'chart' && chartInstance) {
-            const indexName = indexNames[i];
-            chartData[indexName].push(price); // Add new price to the chart
-            if (chartData[indexName].length > 10) chartData[indexName].shift(); // Keep only the last 10 data points
-            chartInstance.update(); // Refresh the chart
-        }
-    });
-}
-
-let priceUpdateInterval = setInterval(updatePrices, 1000); // Start with 1-second updates
 
 // Add Index
 function addIndex(indexName) {
@@ -201,8 +205,8 @@ function searchIndex() {
 // Initialize
 window.onload = function() {
     document.getElementById("homePage").style.display = "block";
-    updatePrices(); // Initialize prices
-    loadMarketNews(); // Load market news
+    fetchMarketData(); // Fetch real-time data
+    setInterval(fetchMarketData, 5000); // Update data every 5 seconds
 
     // Close menu when a link is clicked
     const menuLinks = document.querySelectorAll("#stackMenuItems a");
