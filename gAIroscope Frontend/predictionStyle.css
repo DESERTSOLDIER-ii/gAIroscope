@@ -1,0 +1,199 @@
+/* ===== Futuristic Cyber Trading Screen ===== */
+body {
+  font-family: 'Orbitron', system-ui, sans-serif;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8f0f8;
+  background: linear-gradient(270deg, #050d2c, #0a1a40, #1a0033, #260040);
+  background-size: 800% 800%;
+  animation: bgMove 20s ease infinite;
+}
+@keyframes bgMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== Animated Cyber Grid Overlay ===== */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridmove 15s linear infinite;
+  z-index: -2;
+}
+@keyframes gridmove {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 40px 40px, 40px 40px; }
+}
+
+/* ===== Matrix Falling Code ===== */
+.matrix {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+.matrix span {
+  position: absolute;
+  top: -100%;
+  font-size: 14px;
+  font-family: monospace;
+  color: rgba(2, 3, 2, 0.7);
+  text-shadow: 0 0 8px #06ffac, 0 0 16px #032016;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(110vh); }
+}
+
+/* ===== Prediction Card (Holographic) ===== */
+.card {
+  position: relative;
+  z-index: 1;
+  width: 460px;
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(15, 19, 37, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 255, 170, 0.6);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 170, 0.4),
+    0 0 40px rgba(183, 0, 255, 0.4),
+    inset 0 0 15px rgba(0, 200, 255, 0.2);
+  overflow: hidden;
+}
+
+/* ===== Hologram Scan Overlay ===== */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom,
+    rgba(1, 25, 25, 0.2) 0%,
+    rgba(0, 255, 255, 0.15) 50%,
+    rgba(1, 25, 25, 0.2) 100%
+  );
+  animation: scan 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes scan {
+  0%   { transform: translateY(-50%); }
+  100% { transform: translateY(50%); }
+}
+
+/* ===== Title ===== */
+h1 {
+  font-size: 22px;
+  margin: 0 0 16px 0;
+  text-align: center;
+  color: #caf549;
+  text-shadow: 0 0 10px #7b23f5, 0 0 20px #00f7ff;
+}
+
+/* ===== Prediction Bubble ===== */
+.prediction {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 170, 0.5);
+}
+
+/* ===== Label with Glitch ===== */
+#label {
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #00ffc6;
+  text-transform: uppercase;
+  position: relative;
+  animation: flicker 2.5s infinite alternate;
+}
+#label::before,
+#label::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  color: #ff0055;
+  clip: rect(0, 900px, 0, 0);
+}
+#label::before {
+  animation: glitchTop 2s infinite linear alternate-reverse;
+}
+#label::after {
+  color: #00ff99;
+  animation: glitchBottom 3s infinite linear alternate-reverse;
+}
+@keyframes glitchTop {
+  10%  { clip: rect(10px, 9999px, 30px, 0); transform: translate(-2px,-2px); }
+  20%  { clip: rect(5px, 9999px, 25px, 0); transform: translate(2px,2px); }
+  30%  { clip: rect(15px, 9999px, 35px, 0); transform: translate(-1px,1px); }
+}
+@keyframes glitchBottom {
+  10%  { clip: rect(40px, 9999px, 70px, 0); transform: translate(2px,2px); }
+  20%  { clip: rect(30px, 9999px, 60px, 0); transform: translate(-2px,-2px); }
+  30%  { clip: rect(20px, 9999px, 50px, 0); transform: translate(1px,-1px); }
+}
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.3; }
+}
+
+/* ===== Meta Info Grid ===== */
+.meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  font-size: 13px;
+}
+
+/* ===== Reasons Blocks ===== */
+.reasons-block, .ai-reason {
+  margin-top: 14px;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(0, 255, 170, 0.05);
+  border-left: 3px solid #00ffc6;
+}
+.reasons-block h2, .ai-reason h2 {
+  font-size: 14px;
+  margin: 0 0 6px 0;
+  color: #00ffc6;
+}
+#pred-reasons li {
+  font-size: 13px;
+  margin-bottom: 4px;
+  font-style: italic;
+  color: #d0eaff;
+}
+#pred-gemini-reason {
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.4;
+  color: #f0faff;
+}
+
+/* ===== Footer ===== */
+.footer {
+  margin-top: 14px;
+  text-align: center;
+  color: #96a9c1;
+  font-size: 12px;
+  letter-spacing: 1px;
+}

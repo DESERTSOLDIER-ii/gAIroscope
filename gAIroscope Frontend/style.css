@@ -1,420 +1,235 @@
-body {
-    font-family: 'Poppins', sans-serif;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #f0f8ff; /* Light blue background */
+    font-family: 'Poppins', sans-serif;
 }
-
-/* Logo as Stack Menu Button */
-.logo-container {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1000; /* High z-index to stay above index cards */
-    cursor: pointer;
+body {
+    background-color: rgb(50, 41, 132);
+    background:linear-gradient(to right, rgb(156, 183, 233), Navy);
 }
-
-.logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-/* Stack Menu Items */
-#stackMenuItems {
-    display: none;
-    position: fixed;
-    top: 80px;
-    left: 20px;
+.container {
+    width: 450px;
     background-color: #fff;
-    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-    padding: 10px;
-    z-index: 1000; /* High z-index to stay above index cards */
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 1, 0.9);
+    overflow: hidden;
+    margin: 50px auto;
+    padding:1.5rem;
 }
-
-#stackMenuItems a {
-    display: block;
-    text-decoration: none;
-    color: #ff6f61; /* Loud pink color */
-    padding: 8px;
-    margin: 5px 0;
+.form-title{
+    padding: 1.5rem;
+    font-size:1.5rem;
+    font-weight:0.4rem;
+    text-align:center;
+    margin-bottom:0.4rem;
 }
-
-#stackMenuItems a:hover {
-    background-color: #f0f0f0;
-}
-
-/* Notification Icon */
-#notificationIcon {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #ff6f61; /* Loud pink color */
-    z-index: 1000; /* High z-index to stay above index cards */
-}
-
-/* App Name */
-.app-name {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Pacifico', cursive; /* Stylish font */
-    font-size: 24px;
-    color: #ff6f61; /* Loud pink color */
-    z-index: 1000; /* High z-index to stay above index cards */
-}
-
-/* Index Cards */
-#indexList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 160px; /* Space for top elements */
-    margin-bottom: 80px; /* Space for bottom bar */
-}
-
-.indexCard {
-    background-color: #ff6f61; /* Loud pink color */
-    color: white;
-    width: 120px;
-    height: 120px;
-    padding: 20px;
-    border-radius: 50%;
-    cursor: pointer;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 50; /* Lower z-index to stay below navigation elements */
-}
-
-.indexName {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.indexPrice {
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-/* Remove Button */
-.remove-button {
-    background-color: #ff3b2f; /* Red color */
-    color: white;
+input{
+    color:inherit;
+    width:100%;
+    background-color:transparent;
     border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
-    margin-top: 5px;
+    border-bottom:1px solid #757575;
+    padding-left:1.5rem;
+    font-size:15px;
 }
-
-.remove-button:hover {
-    background-color: #ff1a1a; /* Darker red on hover */
+.input-group {
+    padding:1%;
+    position:relative;
 }
-
-/* Pages */
-.page {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 200;
-    padding: 20px; /* Add padding to create an invisible border */
-    box-sizing: border-box; /* Ensure padding is included in width/height */
+.input-group i {
+    position:absolute;
+    color:black;
 }
-
-.page-title {
-    color: #ff6f61; /* Loud pink color */
-    text-align: center;
-    margin-top: 10px; /* Adjusted to move higher */
-    font-size: 24px; /* Consistent font size for all page titles */
+input:focus {
+    background-color: transparent;
+    outline: transparent;
+    border-bottom:2px solid dodgerblue;
 }
-
-.page-description {
-    color: #333;
-    font-size: 16px;
-    margin: 20px auto;
-    text-align: center;
-    max-width: 80%; /* Add invisible border */
+input::placeholder {
+    color: transparent;
 }
-
-/* Market News Page */
-#marketNewsPage {
-    background-color: #fff;
-    color: #333;
-    padding: 20px;
+label {
+    color: #757575;
+    position: relative;
+    left: 1.2rem;
+    top: -1.3rem;
+    cursor: auto;
+    transition: 0.3s ease all;
 }
-
-#newsList {
-    margin-top: 20px;
+input:focus ~ label,input:not(:placeholder-shown) ~ label {
+    top: -0.3em;
+    color: rgba(127, 21, 134, 0.596);
+    font-size: 15px;
 }
+.forgot{
+    text-align:right;
+    font-size: 1rem;
+    margin-bottom: 1rem;
 
-.news-item {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
 }
-
-.news-item a {
-    color: #ff6f61;
+.forgot a{
+    color: rgba(8, 49, 90, 0.881);
     text-decoration: none;
 }
-
-.news-item a:hover {
+.forgot a:hover{
+    color: black;
     text-decoration: underline;
 }
-
-/* Settings Page */
-.settings-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
+.btn{
+    width:100%;
+    background-color: rgba(188, 59, 59, 0.685);
+    outline: none;
+    border:none;
+    padding:8px 0;
+    font-size:1.1rem;
+    color:#fff;
+    border-radius:5px;
+    cursor:pointer;
+    transition:0.9s ease all;
 }
-
-.settings-list label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.btn:hover{
+    background-color: rgb(18, 36, 234);
 }
-
-.settings-list input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-}
-
-.settings-list input[type="text"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-/* Add Index Page */
-.suggested-indexes {
-    margin-top: 20px;
-}
-
-.index-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.index-item {
-    background-color: #ff6f61;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.search-index {
-    margin-top: 20px;
-}
-
-#searchIndexInput {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 200px;
-}
-
-#searchResults {
-    margin-top: 10px;
-}
-
-/* Profile Page */
-.profile-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.profile-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.profile-form button {
-    background-color: #ff6f61;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-/* Chart Page */
-#chartPage {
-    background-color: #2c3e50; /* Grey background */
-    color: white;
-    padding: 20px;
-    box-sizing: border-box; /* Ensure padding is included in width/height */
-}
-
-#chartPage canvas {
-    background-color: #34495e; /* Darker grey for chart background */
-    border-radius: 10px;
-    width: calc(100% - 40px); /* Adjust width to respect invisible border */
-    height: 200px; /* Smaller chart size */
-    margin-top: 60px; /* Space for chart title and buttons */
-}
-
-/* Back Button (Top Left Corner) */
-.back-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: #ff6f61; /* Loud pink color */
-    color: white;
-    border: none;
-    padding: 10px 15px; /* Smaller padding */
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px; /* Smaller font size */
-    z-index: 1000; /* Ensure it's above other elements */
-}
-
-/* Chart Title */
-#chartTitle {
-    position: absolute;
-    top: 10px; /* Adjusted to move higher */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 18px; /* Smaller font size */
-    color: white;
-    z-index: 1000; /* Ensure it's above other elements */
-}
-
-/* Timeframe Button */
-.timeframe-nob {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1000; /* Ensure it's above other elements */
-}
-
-.timeframe-menu {
-    display: none;
-    position: absolute;
-    top: 40px;
-    right: 20px; /* Adjust to respect invisible border */
-    background-color: #fff;
-    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-    padding: 10px;
-    z-index: 1000; /* High z-index to stay above chart */
-}
-
-.timeframe-menu button {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    background-color: #ff6f61; /* Loud pink color */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.timeframe-menu button:hover {
-    background-color: #ff3b2f; /* Darker pink on hover */
-}
-
-/* Chart Tools */
-.chart-tools {
-    position: absolute;
-    top: 60px; /* Below the chart title */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 1000; /* Ensure it's above other elements */
-}
-
-.chart-tools button {
-    background-color: #4CAF50; /* Green color */
-    color: white;
-    border: none;
-    padding: 8px 15px; /* Smaller padding */
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px; /* Smaller font size */
-}
-
-.chart-tools button:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-
-/* Make Appearance and Lines buttons smaller */
-#appearanceButton, #linesButton {
-    padding: 6px 12px; /* Even smaller padding */
-    font-size: 12px; /* Smaller font size */
-}
-
-/* Close Button */
-.close-button {
-    position: absolute;
-    top: 20px; /* Moved to top left */
-    left: 20px;
-    background-color: #ff6f61; /* Loud pink color */
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    z-index: 1000; /* Ensure it's above other elements */
-}
-
-/* Bottom Bar */
-#bottomBar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #001f3f; /* Navy blue */
-    color: white;
+.or{
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
     text-align: center;
-    padding: 10px;
+    color: rgb(125, 125, 235);
+}
+.icons{
+    text-align: center;
+}
+.icons i{
+    color:rgb(125,125,235);
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    background-color: wheat;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: 1px solid yellow;
+    margin: 0 auto;
+    display: inline-block;
+    transition: 1s;
+}
+.icons i:hover{
+    background-color: black;
+    font-size: 1.6rem;
+    border:2px solid rgb(125,125,235);
+}
+.links{
     display: flex;
     justify-content: space-around;
-    z-index: 1000; /* High z-index to stay above index cards */
+    padding: 0 4rem;
+    margin-top: 0.9rem;
+    font-weight: bold;
+}
+button{
+    color:rgb(125,125,235);
+    border:none;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: bold;
+}
+button:hover{
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
 }
 
-#bottomBar a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
+/* Dashboard Page */
+.dashboard-body {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: white;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Hide top section on non-home pages */
-.page:not(#homePage) .logo-container,
-.page:not(#homePage) .app-name,
-.page:not(#homePage) #notificationIcon {
-    display: none;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a1a40;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar .nav-links li a {
+  text-decoration: none;
+  color: #ddd;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar .nav-links li a:hover {
+  color: #fff;
+}
+
+.logout-btn {
+  color: #ff4c4c !important;
+  font-weight: bold;
+}
+
+.welcome {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.welcome h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 3rem auto;
+  flex-wrap: wrap;
+  max-width: 1000px;
+}
+
+.card {
+  background: #2a2a5e;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  width: 250px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.card-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #ff4c4c;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.card-btn:hover {
+  background: #ff1a1a;
 }
