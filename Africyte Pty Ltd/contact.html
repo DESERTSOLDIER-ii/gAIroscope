@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Africyte</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <div class="bg-circle circle-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <div class="logo">
+                        <div class="logo-core"></div>
+                        <div class="logo-node node-1"></div>
+                        <div class="logo-node node-2"></div>
+                        <div class="logo-node node-3"></div>
+                    </div>
+                    <div class="logo-text">Africyte</div>
+                </a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Get in touch to discuss how we can help transform your business</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h2>Let's Start a Conversation</h2>
+                    <p>Whether you're interested in our products, services, partnerships, or career opportunities, we're here to help. Reach out to us through any of the channels below.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-details">
+                                <h3>General Inquiries</h3>
+                                <a href="mailto:info@africyte.co.za">info@africyte.co.za</a>
+                                <p>For general questions about Africyte and our services</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="method-details">
+                                <h3>Phone</h3>
+                                <a href="tel:+27792442008">+27 79 244 2008</a>
+                                <p>Available during business hours (GMT+2)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="method-details">
+                                <h3>Careers</h3>
+                                <a href="mailto:careers@africyte.co.za">careers@africyte.co.za</a>
+                                <p>For job applications and career inquiries</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="method-details">
+                                <h3>Partnerships</h3>
+                                <a href="mailto:info@africyte.co.za">info@africyte.co.za</a>
+                                <p>For business partnership opportunities</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-contacts">
+                        <h3>Product Specific Contacts</h3>
+                        <div class="product-contact-list">
+                            <div class="product-contact">
+                                <strong>DEVFLOW:</strong> <a href="mailto:info@devflow.co.za">info@devflow.co.za</a>
+                            </div>
+                            <div class="product-contact">
+                                <strong>Locallo:</strong> <a href="mailto:info@locallo.co.za">info@locallo.co.za</a>
+                            </div>
+                            <div class="product-contact">
+                                <strong>gAIroscope:</strong> <a href="mailto:info@gairoscope.co.za">info@gairoscope.co.za</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container fade-in">
+                    <div class="contact-form">
+                        <h3>Send Us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company">Company (Optional)</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a topic</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="devflow">DEVFLOW Development</option>
+                                    <option value="locallo">Locallo Marketplace</option>
+                                    <option value="gairoscope">gAIroscope AI</option>
+                                    <option value="itsupport">IT & Support</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="career">Career Opportunity</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Quick answers to common questions</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>What is Africyte's main focus?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Africyte focuses on creating accessible digital opportunities that empower underprivileged communities, small traders, and underserved entrepreneurs. We build platforms and tools that help turn skills and services into sustainable livelihoods.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>How can I become a seller on Locallo?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To become a Locallo seller, please email info@locallo.co.za with your business details. Our team will guide you through the verification process and help you set up your digital storefront with all the necessary tools for success.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>Do you offer custom software development?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Through our DEVFLOW studio, we offer custom software development tailored to your specific business needs. Contact info@devflow.co.za to discuss your project requirements and get a consultation.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>What is your response time for inquiries?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We aim to respond to all inquiries within 24-48 hours during business days. For urgent matters, please call +27 79 244 2008 during business hours (GMT+2).</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>Are you currently hiring?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We're always looking for talented individuals who share our mission. Current openings are listed on our Careers page. Send your CV to careers@africyte.co.za to be considered for future opportunities as well.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>Do you offer IT support for small businesses?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Our IT & Support services are designed for businesses of all sizes. We provide everything from basic technical support to comprehensive infrastructure management. Contact info@africyte.co.za to discuss your IT needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Info -->
+    <section class="business-info">
+        <div class="container">
+            <div class="info-cards">
+                <div class="info-card fade-in">
+                    <div class="info-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Company Information</h3>
+                    <p><strong>Africyte (Pty) Ltd</strong><br>
+                    Registered subsidiary of Pule Property<br>
+                    B-BBEE: Level 1</p>
+                </div>
+                
+                <div class="info-card fade-in">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Business Hours</h3>
+                    <p><strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM<br>
+                    <strong>Saturday:</strong> 9:00 AM - 1:00 PM<br>
+                    <strong>Sunday:</strong> Closed<br>
+                    <em>All times are GMT+2 (South Africa Standard Time)</em></p>
+                </div>
+                
+                <div class="info-card fade-in">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Location</h3>
+                    <p>Based in South Africa, serving clients across the African continent and beyond. Our head office details will be announced soon as we expand our physical presence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Africyte</h3>
+                    <p>We Share Technology - Building platforms and tools that empower businesses and communities through accessible technology solutions.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="products.html"><i class="fas fa-chevron-right"></i> Products</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="careers.html"><i class="fas fa-chevron-right"></i> Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@africyte.co.za"><i class="fas fa-envelope"></i> info@africyte.co.za</a></li>
+                        <li><a href="tel:+27792442008"><i class="fas fa-phone"></i> +27 79 244 2008</a></li>
+                        <li><a href="#"><i class="fas fa-certificate"></i> B-BBEE: Applied (Level 1)</a></li>
+                        <li><a href="#"><i class="fas fa-building"></i> Parent Company: Pule Property</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© <span id="current-year">2023</span> Africyte (Pty) Ltd. All Rights Reserved. | We Share Technology</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Bot -->
+    <div class="chat-bot">
+        <button class="chat-button">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <div class="chat-window">
+            <div class="chat-header">
+                <i class="fas fa-robot"></i>
+                <span>Funi - Africyte Assistant</span>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <div class="chat-message bot-message">
+                    Hello! I'm Funi, your Africyte assistant. How can I help you today?
+                </div>
+                <div class="chat-options">
+                    <div class="option" data-option="products">Our Products</div>
+                    <div class="option" data-option="services">Our Services</div>
+                    <div class="option" data-option="careers">Careers</div>
+                    <div class="option" data-option="partnerships">Partnerships</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
